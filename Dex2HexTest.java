@@ -40,6 +40,7 @@ public class Dex2HexTest {
 	String[] args = {"15"};
 	String output = getOutput(args);
 
+	//check that the output matches the expected output
 	assertTrue(output.contains("Converting the Decimal Value 15 to Hex..."));
 	assertTrue(output.contains("Hexadecimal representation is: F"));
     }
