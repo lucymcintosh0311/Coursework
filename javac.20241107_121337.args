@@ -1,0 +1,5 @@
+-cp
+.:./junit4.10/junit-4.10.jar
+Dex2Hex.java
+Dex2HexTest.java
+TestRunner.java

@@ -1,20 +1,18 @@
 import java.util.Scanner;
 
-class Dex2Hex
-{
-public static int Arg1;
-    public static void main(String args[])    {
+public class Dex2Hex{
+    public static int Arg1;
+    public static void main(String args[]) {
 	// Check if the user provided an input
         if (args.length < 1) {
             System.out.println("Input Error: Please provide a number input.");
             return;
-        }
-
-        int num;
+	}	
+        int num2;
 
         // Try to parse the provided argument into an integer
         try {
-            num = Integer.parseInt(args[0]);
+            num2 = Integer.parseInt(args[0]);
         } 
 	catch (NumberFormatException e) {
 
@@ -40,5 +38,5 @@ public static int Arg1;
         System.out.println("Hexadecimal representation is: " + hexadecimal);
 
     }
-}
 
+}
