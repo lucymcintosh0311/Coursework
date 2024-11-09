@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Dex2Hex {
 public static int Arg1;
