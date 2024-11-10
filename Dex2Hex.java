@@ -1,11 +1,7 @@
 import java.util.logging.Logger;
 
 public class Dex2Hex {
-private int arg1;
-
-public int getArg1() {
-	return arg1;
-    }
+public int arg1;
 
 private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
 
@@ -31,9 +27,9 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         int rem;
 	int num = arg1;
 
-        
-        logger.fine(String.format("Converting the Decimal Value %d to Hex...", num));
-
+        if (logger.isLoggable(java.util.logging.Level.INFO)) {
+            logger.info(String.format("Converting the Decimal Value %d to Hex...", num));
+	}
 
         StringBuilder hexadecimal = new StringBuilder();
 
