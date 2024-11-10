@@ -7,11 +7,10 @@ public static int Arg1;
             System.out.println("Input Error: Please provide a number input.");
             return;
         }
-        int num2;
 
         // Try to parse the provided argument into an integer
         try {
-            num2 = Integer.parseInt(args[0]);
+            int num2 = Integer.parseInt(args[0]);
         }
         catch (NumberFormatException e) {
 
