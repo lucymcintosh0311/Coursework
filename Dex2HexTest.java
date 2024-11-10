@@ -34,10 +34,6 @@ public class Dex2HexTest {
             logger.removeHandler(streamHandler);
         }
 
-        // Return the captured log content as a string
-        return logContent.toString();
-    }
-
     @Test
     public void testDecimalToHex() {
         // Test with valid input
