@@ -78,7 +78,7 @@ public class Dex2HexTest {
         String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message for invalid input
-        assertTrue(output.contains("Input Error: Invalid input. Please enter a valid integer."));
+        assertTrue(logOutput.contains("Input Error: Invalid input. Please enter a valid integer."));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class Dex2HexTest {
         String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message when no input is provided
-        assertTrue(output.contains("Input Error: Please provide a number input."));
+        assertTrue(logOutput.contains("Input Error: Please provide a number input."));
     }
 }
 
