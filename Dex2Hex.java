@@ -1,7 +1,7 @@
 import java.util.logging.Logger;
 
 public class Dex2Hex {
-public int arg1;
+public static int arg1;
 
 private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
 
@@ -39,9 +39,9 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
             hexadecimal.insert(0, ch[rem]);
             num= num/16;
         }
-	
+	 if (logger.isLoggable(java.util.logging.Level.INFO)) {
         logger.fine(String.format("Hexadecimal representation is: %s", hexadecimal));
-	
+	}
     }
 
 }
