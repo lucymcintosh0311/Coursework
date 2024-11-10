@@ -8,18 +8,23 @@ import java.util.logging.Logger;
 
 public class Dex2HexTest {
 
-    // Utility method to capture log output
+    // Utility method to capture log output as wanted from sonarqube
     public String getLoggerOutput(String[] args) {
         // Set up a ByteArrayOutputStream to capture log output
         ByteArrayOutputStream logContent = new ByteArrayOutputStream();
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        consoleHandler.setOutputStream(logContent);
-
+        
+        // Create a stream handler that writes logs to the ByteArrayOutputStream
+        StreamHandler streamHandler = new StreamHandler(logContent, new SimpleFormatter());
+        
         // Get the logger for the Dex2Hex class
         Logger logger = Logger.getLogger(Dex2Hex.class.getName());
-        logger.addHandler(consoleHandler);
-        logger.setLevel(Level.ALL);  // Capture all levels of log messages
+        
+        // Remove any default handlers, then add custom handler
+        logger.setUseParentHandlers(false);
+        logger.addHandler(streamHandler);
+
+        // Set the log level for the logger (capture all levels of logs)
+        logger.setLevel(Level.ALL);
 
         try {
             // Call the main method with the provided arguments
