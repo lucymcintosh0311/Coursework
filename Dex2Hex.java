@@ -40,7 +40,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
             num= num/16;
         }
 	 if (logger.isLoggable(java.util.logging.Level.INFO)) {
-        logger.fine(String.format("Hexadecimal representation is: %s", hexadecimal));
+        logger.info(String.format("Hexadecimal representation is: %s", hexadecimal));
 	}
     }
 
