@@ -1,10 +1,13 @@
+import java.util.logging.Logger;
 
 public class Dex2Hex {
 public static int Arg1;
+private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
+
     public static void main(String args[]) {
         // Check if the user provided an input
         if (args.length < 1) {
-            System.out.println("Input Error: Please provide a number input.");
+            logger.severe("Input Error: Please provide a number input.");
             return;
         }
 
@@ -15,7 +18,7 @@ public static int Arg1;
         catch (NumberFormatException e) {
 
             // If the argument is not a valid integer, print an error message
-            System.out.println("Input Error: Invalid input. Please enter a valid integer.");
+            logger.severe("Input Error: Invalid input. Please enter a valid integer.");
             return;
         }
 
@@ -24,7 +27,7 @@ public static int Arg1;
         int rem, num;
         num = Arg1;
         String hexadecimal="";
-        System.out.println("Converting the Decimal Value " + num + " to Hex...");
+        logger.info("Converting the Decimal Value " + num + " to Hex...");
 
         while(num != 0)
         {
@@ -33,7 +36,7 @@ public static int Arg1;
             num= num/16;
         }
 
-        System.out.println("Hexadecimal representation is: " + hexadecimal);
+        logger.info("Hexadecimal representation is: " + hexadecimal);
 
     }
 
