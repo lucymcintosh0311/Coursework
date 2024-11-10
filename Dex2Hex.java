@@ -1,8 +1,13 @@
 import java.util.logging.Logger;
 
 public class Dex2Hex {
-public static final int arg1;
+public static final int ARG1;
 private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
+
+    static {
+        // Initialize the constant ARG1
+        ARG1 = 0;  
+    }
 
     public static void main(String[] args) {
         // Check if the user provided an input
@@ -13,7 +18,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
 
         // Try to parse the provided argument into an integer
         try {
-            arg1 = Integer.parseInt(args[0]);
+            ARG1 = Integer.parseInt(args[0]);
         }
         catch (NumberFormatException e) {
 
@@ -22,11 +27,10 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
             return;
         }
 
-        arg1 = Integer.parseInt(args[0]);
+        //arg1 = Integer.parseInt(args[0]);
         char[] ch={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
         int rem;
-	int num;
-        num = arg1;
+	int num = ARG1;
         
         logger.warning(String.format("Converting the Decimal Value %d to Hex...", num));
 
