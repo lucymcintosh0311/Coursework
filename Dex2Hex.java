@@ -34,7 +34,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         while(num != 0)
         {
             rem=num%16;
-            hexadecimal= ch[rem] + hexadecimal;
+            hexadecimal.insert(0, ch[rem]);
             num= num/16;
         }
 
