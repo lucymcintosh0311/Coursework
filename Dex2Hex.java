@@ -18,7 +18,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         }
         catch (NumberFormatException e) {
 
-            // If the argument is not a valid integer, print an error message
+        // If the argument is not a valid integer, print an error message
             logger.severe("Input Error: Invalid input. Please enter a valid integer.");
             return;
         }
