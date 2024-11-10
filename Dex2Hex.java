@@ -27,7 +27,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         int rem;
 	int num;
         num = arg1;
-        String hexadecimal="";
+        //String hexadecimal="";
         logger.info(String.format("Converting the Decimal Value %d to Hex...", num));
 
         StringBuilder hexadecimal = new StringBuilder();
