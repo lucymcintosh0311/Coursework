@@ -31,7 +31,7 @@ public class Dex2HexTest {
             Dex2Hex.main(args);
         } finally {
             // Remove the handler to prevent duplication
-            logger.removeHandler(consoleHandler);
+            logger.removeHandler(streamHandler);
         }
 
         // Return the captured log content as a string
