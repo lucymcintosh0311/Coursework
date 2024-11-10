@@ -25,8 +25,10 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         char[] ch={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
         int rem;
 	int num = arg1;
-        
-        logger.warning(String.format("Converting the Decimal Value %d to Hex...", num));
+
+        if (num >= 0) {
+            logger.warning(String.format("Converting the Decimal Value %d to Hex...", num));
+	}
 
         StringBuilder hexadecimal = new StringBuilder();
 
@@ -36,9 +38,9 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
             hexadecimal.insert(0, ch[rem]);
             num= num/16;
         }
-
-        logger.warning(String.format("Hexadecimal representation is: %s", hexadecimal));
-
+	if (hexadecimal != null) {
+            logger.warning(String.format("Hexadecimal representation is: %s", hexadecimal));
+	}
     }
 
 }
