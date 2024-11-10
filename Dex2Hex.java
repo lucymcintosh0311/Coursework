@@ -30,6 +30,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
         String hexadecimal="";
         logger.info(String.format("Converting the Decimal Value %d to Hex...", num));
 
+        StringBuilder hexadecimal = new StringBuilder();
 
         while(num != 0)
         {
