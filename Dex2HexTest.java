@@ -1,70 +1,70 @@
-//import org.junit.Before;
 import org.junit.Test;
-import org.junit.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Dex2HexTest {
 
-    //Dex2Hex decimaltohexadecimal;
-    // Utility method to capture output from main method
-    public String getOutput(String[] args) {
-        // Capture the original System.out
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        PrintStream originalSystemOut = System.out;
-        System.setOut(new PrintStream(outContent));  // Redirect System.out to capture output
+    // Utility method to capture log output
+    public String getLoggerOutput(String[] args) {
+        // Set up a ByteArrayOutputStream to capture log output
+        ByteArrayOutputStream logContent = new ByteArrayOutputStream();
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
+        consoleHandler.setOutputStream(logContent);
+
+        // Get the logger for the Dex2Hex class
+        Logger logger = Logger.getLogger(Dex2Hex.class.getName());
+        logger.addHandler(consoleHandler);
+        logger.setLevel(Level.ALL);  // Capture all levels of log messages
 
         try {
             // Call the main method with the provided arguments
             Dex2Hex.main(args);
         } finally {
-            // Reset System.out back to original
-            System.setOut(originalSystemOut);
+            // Remove the handler to prevent duplication
+            logger.removeHandler(consoleHandler);
         }
 
-        return outContent.toString();  // Return the captured output
+        // Return the captured log content as a string
+        return logContent.toString();
     }
 
+    @Test
+    public void testDecimalToHex() {
+        // Test with valid input
+        String[] args = {"15"};
+	// Using logger here as wanted from sonarqube
+        String output = getLoggerOutput(args);
 
-    //@Test
-    //public void testDecimalToHexZero() {
-	//Test with input of 0
-        //assertEquals("0", decimaltohexadecimal.Dex2Hex(0));
-    //}
-
-   @Test
-   public void testDecimalToHex() {
-	//Test with valid inputs
-	String[] args = {"15"};
-	String output = getOutput(args);
-
-	//check that the output matches the expected output
-	assertTrue(output.contains("Converting the Decimal Value 15 to Hex..."));
-	assertTrue(output.contains("Hexadecimal representation is: F"));
+        // Check that the log output contains the expected messages
+        assertTrue(output.contains("Converting the Decimal Value 15 to Hex..."));
+        assertTrue(output.contains("Hexadecimal representation is: F"));
     }
 
-   @Test
-   public void testDecimalToHexInvalidInteger() {
-        // create an invalid input
+    @Test
+    public void testDecimalToHexInvalidInteger() {
+        // Test with invalid input
         String[] args = {"r"};
-        String output2 = getOutput(args);
-        
-        // Call the main method with invalid input
-        Dex2Hex.main(args);
+	//Using logger here as wanted from sonarqube
+        String output = getLoggerOutput(args);
 
-        assertTrue(output2.contains("Input Error: Invalid input. Please enter a valid integer."));
+        // Check for the expected error message for invalid input
+        assertTrue(output.contains("Input Error: Invalid input. Please enter a valid integer."));
     }
 
-   @Test
-   public void testDecimalToHexNoInteger() {
-        // create an invalid input
+    @Test
+    public void testDecimalToHexNoInteger() {
+        // Test with no input
         String[] args = {};
-	String output3 = getOutput(args);
-	
-	assertTrue(output3.contains("Input Error: Please provide a number input."));
+	//Using logger here as wanted from sonarqube
+        String output = getLoggerOutput(args);
 
-
+        // Check for the expected error message when no input is provided
+        assertTrue(output.contains("Input Error: Please provide a number input."));
     }
 }
+
