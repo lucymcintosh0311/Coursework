@@ -38,7 +38,7 @@ private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
             num= num/16;
         }
 
-        logger.info(String.format("Hexadecimal representation is: %d", hexadecimal));
+        logger.info(String.format("Hexadecimal representation is: %s", hexadecimal));
 
     }
 
