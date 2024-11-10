@@ -10,7 +10,7 @@ import java.util.logging.*;
 
 public class Dex2HexTest {
 
-// ByteArrayOutputStream to capture the output of the logger
+    // ByteArrayOutputStream to capture the output of the logger
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final Logger logger = Logger.getLogger(Dex2Hex.class.getName());  // Logger instance to capture log messages
     private Handler customHandler;  // Custom handler to redirect log output to the ByteArrayOutputStream
@@ -31,43 +31,51 @@ public class Dex2HexTest {
 
             @Override
             public void flush() {
+                // No flushing needed for this example
             }
 
             @Override
             public void close() throws SecurityException {
+                // No cleanup required for this handler
             }
         };
+
         customHandler.setLevel(Level.ALL);  // Capture all log levels (severe, info, etc.)
         logger.addHandler(customHandler);  // Add the custom handler to the logger
     }
 
-    // Tear down method to remove the custom handler and reset the output stream
+    // Cleanup method to remove the custom handler after each test
     @After
     public void tearDown() {
-	// Remove the custom handler after each test
-        logger.removeHandler(customHandler);  
-	// Reset the output stream to prepare for the next test
-        outputStreamCaptor.reset();     
-
+        logger.removeHandler(customHandler);  // Clean up the custom handler
+    }
 
     @Test
     public void testDecimalToHex() {
-        // Test with valid input
+        // Sample input to the main method of Dex2Hex
         String[] args = {"15"};
-	// Using logger here as wanted from sonarqube
-        String output = getLoggerOutput(args);
+        
+        // Call the main method of Dex2Hex (assuming it generates logs)
+        Dex2Hex.main(args);
 
-        // Check that the log output contains the expected messages
-        assertTrue(output.contains("Converting the Decimal Value 15 to Hex..."));
-        assertTrue(output.contains("Hexadecimal representation is: F"));
+        // Capture the output from the logger and check if it contains the expected log messages
+        String logOutput = outputStreamCaptor.toString();
+
+        // Assert that the log contains the expected messages
+        assertTrue(logOutput.contains("Converting the Decimal Value 15 to Hex..."));
+        assertTrue(logOutput.contains("Hexadecimal representation is: F"));
     }
 
     @Test
     public void testDecimalToHexInvalidInteger() {
         // Test with invalid input
         String[] args = {"r"};
-	//Using logger here as wanted from sonarqube
-        String output = getLoggerOutput(args);
+
+	 // Call the main method of Dex2Hex (assuming it generates logs)
+        Dex2Hex.main(args);
+
+        // Capture the output from the logger and check if it contains the expected log messages
+        String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message for invalid input
         assertTrue(output.contains("Input Error: Invalid input. Please enter a valid integer."));
@@ -77,8 +85,11 @@ public class Dex2HexTest {
     public void testDecimalToHexNoInteger() {
         // Test with no input
         String[] args = {};
-	//Using logger here as wanted from sonarqube
-        String output = getLoggerOutput(args);
+	 // Call the main method of Dex2Hex (assuming it generates logs)
+        Dex2Hex.main(args);
+
+        // Capture the output from the logger and check if it contains the expected log messages
+        String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message when no input is provided
         assertTrue(output.contains("Input Error: Please provide a number input."));
