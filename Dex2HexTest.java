@@ -1,4 +1,6 @@
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -8,31 +10,45 @@ import java.util.logging.*;
 
 public class Dex2HexTest {
 
-    // Utility method to capture log output as wanted from sonarqube
-    public String getLoggerOutput(String[] args) {
-        // Set up a ByteArrayOutputStream to capture log output
-        ByteArrayOutputStream logContent = new ByteArrayOutputStream();
-        
-        // Create a stream handler that writes logs to the ByteArrayOutputStream
-        StreamHandler streamHandler = new StreamHandler(logContent, new SimpleFormatter());
-        
-        // Get the logger for the Dex2Hex class
-        Logger logger = Logger.getLogger(Dex2Hex.class.getName());
-        
-        // Remove any default handlers, then add custom handler
-        logger.setUseParentHandlers(false);
-        logger.addHandler(streamHandler);
+// ByteArrayOutputStream to capture the output of the logger
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final Logger logger = Logger.getLogger(Dex2Hex.class.getName());  // Logger instance to capture log messages
+    private Handler customHandler;  // Custom handler to redirect log output to the ByteArrayOutputStream
 
-        // Set the log level for the logger (capture all levels of logs)
-        logger.setLevel(Level.ALL);
+    // Setup method to initialize the custom handler and attach it to the logger
+    @Before
+    public void setUp() {
+        // Create a custom Handler to capture log messages
+        customHandler = new Handler() {
+            @Override
+            public void publish(LogRecord record) {
+                try {
+                    outputStreamCaptor.write(record.getMessage().getBytes());  // Capture log message
+                } catch (IOException e) {
+                    e.printStackTrace();  // Handle IOException
+                }
+            }
 
-        try {
-            // Call the main method with the provided arguments
-            Dex2Hex.main(args);
-        } finally {
-            // Remove the handler to prevent duplication
-            logger.removeHandler(streamHandler);
-        }
+            @Override
+            public void flush() {
+            }
+
+            @Override
+            public void close() throws SecurityException {
+            }
+        };
+        customHandler.setLevel(Level.ALL);  // Capture all log levels (severe, info, etc.)
+        logger.addHandler(customHandler);  // Add the custom handler to the logger
+    }
+
+    // Tear down method to remove the custom handler and reset the output stream
+    @After
+    public void tearDown() {
+	// Remove the custom handler after each test
+        logger.removeHandler(customHandler);  
+	// Reset the output stream to prepare for the next test
+        outputStreamCaptor.reset();     
+
 
     @Test
     public void testDecimalToHex() {
