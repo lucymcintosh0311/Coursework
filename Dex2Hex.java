@@ -10,7 +10,7 @@ public static int Arg1;
 
         // Try to parse the provided argument into an integer
         try {
-            int num2 = Integer.parseInt(args[0]);
+            Arg1 = Integer.parseInt(args[0]);
         }
         catch (NumberFormatException e) {
 
