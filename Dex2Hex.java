@@ -1,7 +1,15 @@
 import java.util.logging.Logger;
 
 public class Dex2Hex {
-public static int arg1;
+private int arg1;
+
+public int getArg1() {
+	return arg1;
+    }
+public void setArg1() {
+	this.arg1 = arg1;
+    }
+
 private static final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
 
     public static void main(String[] args) {
