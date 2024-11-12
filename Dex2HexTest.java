@@ -1,3 +1,4 @@
+// Import all necessary libraries
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -10,44 +11,51 @@ import java.util.logging.*;
 
 public class Dex2HexTest {
 
-    // ByteArrayOutputStream to capture the output of the logger
+    // ByteArrayOutputStream to get the output of the logger
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private final Logger logger = Logger.getLogger(Dex2Hex.class.getName());  // Logger instance to capture log messages
-    private Handler customHandler;  // Custom handler to redirect log output to the ByteArrayOutputStream
+    // Logger instance to get log message outputs
+    private final Logger logger = Logger.getLogger(Dex2Hex.class.getName());
+    // Custom handler to redirect log output to the ByteArrayOutputStream 
+    private Handler customHandler;  
 
-    // Setup method to initialize the custom handler and attach it to the logger
+    // Before setup method to initialize the custom handler and attach it to the logger
     @Before
     public void setUp() {
-        // Create a custom Handler to capture log messages
+        // Create a custom Handler object to capture log messages
         customHandler = new Handler() {
             @Override
             public void publish(LogRecord record) {
                 try {
-                    outputStreamCaptor.write(record.getMessage().getBytes());  // Capture log message
+		    // Capture log message
+                    outputStreamCaptor.write(record.getMessage().getBytes()); 
                 } catch (IOException e) {
-                    e.printStackTrace();  // Handle IOException
+		    // Handle IOException
+                    e.printStackTrace(); 
                 }
             }
 
-            @Override
-            public void flush() {
+            //@Override
+           // //public void flush() {
                 // No flushing needed for this example
-            }
+            //}
 
-            @Override
-            public void close() throws SecurityException {
+            //@Override
+            //public void close() throws SecurityException {
                 // No cleanup required for this handler
-            }
+            //}
         };
-
-        customHandler.setLevel(Level.ALL);  // Capture all log levels (severe, info, etc.)
-        logger.addHandler(customHandler);  // Add the custom handler to the logger
+	
+	// Capture all log levels
+        customHandler.setLevel(Level.ALL);
+	// Add the custom handler to the logger 
+        logger.addHandler(customHandler); 
     }
 
-    // Cleanup method to remove the custom handler after each test
+    // Method to remove the custom handler after each test
     @After
     public void tearDown() {
-        logger.removeHandler(customHandler);  // Clean up the custom handler
+	// Remove the custom handler
+        logger.removeHandler(customHandler); 
     }
 
     @Test
@@ -58,10 +66,10 @@ public class Dex2HexTest {
         // Call the main method of Dex2Hex (assuming it generates logs)
         Dex2Hex.main(args);
 
-        // Capture the output from the logger and check if it contains the expected log messages
+        // Save the output from the logger and check if it contains the expected log messages
         String logOutput = outputStreamCaptor.toString();
 
-        // Assert that the log contains the expected messages
+        // Check that the log contains the expected messages
         assertTrue(logOutput.contains("Converting the Decimal Value 15 to Hex..."));
         assertTrue(logOutput.contains("Hexadecimal representation is: F"));
     }
@@ -74,7 +82,7 @@ public class Dex2HexTest {
 	 // Call the main method of Dex2Hex (assuming it generates logs)
         Dex2Hex.main(args);
 
-        // Capture the output from the logger and check if it contains the expected log messages
+        // Save the output from the logger and check if it contains the expected log messages
         String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message for invalid input
@@ -85,10 +93,11 @@ public class Dex2HexTest {
     public void testDecimalToHexNoInteger() {
         // Test with no input
         String[] args = {};
+
 	 // Call the main method of Dex2Hex (assuming it generates logs)
         Dex2Hex.main(args);
 
-        // Capture the output from the logger and check if it contains the expected log messages
+        // Save the output from the logger and check if it contains the expected log messages
         String logOutput = outputStreamCaptor.toString();
 
         // Check for the expected error message when no input is provided
