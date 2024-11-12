@@ -43,7 +43,7 @@ public class Dex2HexTest {
             //public void close() throws SecurityException {
                 // No cleanup required for this handler
             //}
-        };
+        }
 	
 	// Capture all log levels
         customHandler.setLevel(Level.ALL);
