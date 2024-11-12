@@ -34,16 +34,17 @@ public class Dex2HexTest {
                 }
             }
 
-            //@Override
-           // //public void flush() {
+	    // If needed extend this class to handle more complex resources, override these methods to close or flush
+            @Override
+            public void flush() {
                 // No flushing needed for this example
-            //}
+            }
 
-            //@Override
-            //public void close() throws SecurityException {
+            @Override
+            public void close() throws SecurityException {
                 // No cleanup required for this handler
-            //}
-        }
+            }
+        };
 	
 	// Capture all log levels
         customHandler.setLevel(Level.ALL);
